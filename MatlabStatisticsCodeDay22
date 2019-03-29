@@ -1,0 +1,41 @@
+M3 = csvread('Day22_10mm_Sizes.csv',1,1);
+M4 = csvread('Day22_25mm_Sizes.csv',1,1);
+tenSizes22 = (M3(:, 1));
+twentyFiveSizes22 = (M4(1:326, 1));
+prog1 = tenSizes22(:) / 200;
+prog2 = ([tenSizes22 prog1]);
+
+% mean
+m1 = mean(tenSizes22);
+m2 = mean(twentyFiveSizes22);
+std1 = std(tenSizes22);
+std2 = std(twentyFiveSizes22);
+display(std1);
+display(std2);
+display(m1);
+display(m2);
+
+
+% t-test
+% inaccurate because not normally distributed
+[h1, p1] = ttest2(tenSizes22, twentyFiveSizes22)
+
+% ranksum wilcox
+[z1,a1, stats] = ranksum(tenSizes22, twentyFiveSizes22);
+display(z1);
+display(a1);
+display(stats);
+
+
+% box plots
+b1 = boxplot(tenSizes22);
+display(b1);
+b2 = boxplot(twentyFiveSizes22);
+display(b2);
+
+% population variance
+v1 = var(tenSizes22);
+v2 = var(twentyFiveSizes22);
+
+% make a histogram, boxplot
+% test for variance --> find test
